@@ -1,5 +1,5 @@
 #!/bin/bash
-# Fully Unattended Debian Entertainment/Gaming Setup - Failproof Version
+# Fully Unattended Debian Entertainment/Gaming Setup - Failproof Version (No Deepin)
 # Hosted on GitHub: https://github.com/david915915/Debian
 
 # Ensure script is run as root
@@ -38,12 +38,6 @@ for pkg in "${packages[@]}"; do
     echo "[!] Failed to install $pkg, skipping."
   fi
 done
-
-# Attempt Deepin (may not exist in current repo)
-echo "[+] Attempting to install Deepin desktop..."
-if ! apt install -y deepin-desktop-environment; then
-  echo "[!] Deepin not found, skipping."
-fi
 
 # Google Chrome
 echo "[+] Installing Google Chrome..."
