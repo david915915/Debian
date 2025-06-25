@@ -2,7 +2,7 @@
 # Fully Unattended Debian Entertainment/Gaming Setup with Resilience
 # Hosted on GitHub: https://github.com/david915915/Debian
 
-set -e
+# DO NOT use set -e so the script continues even if a command fails
 
 # Ensure script is run as root
 if [ "$EUID" -ne 0 ]; then
@@ -30,9 +30,11 @@ apt install -y mate-desktop-environment || true
 apt install -y xfce4 || true
 apt install -y lightdm || true
 
-# Deepin Desktop (try but skip if not found)
+# Deepin Desktop (fail gracefully)
 echo "[+] Attempting to install Deepin desktop environment..."
-apt install -y deepin-desktop-environment || true
+if ! apt install -y deepin-desktop-environment; then
+  echo "[!] Deepin not found in current repos. Skipping."
+fi
 
 # Browsers
 echo "[+] Installing web browsers..."
